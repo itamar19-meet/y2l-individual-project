@@ -1,11 +1,51 @@
 <!doctype html>
-<title>{{meme_name}}</title>
-    <html>
-        <head>
-        	Meme Review!
-      </head>
-        <body>
-          
-        </body>
-    </html>
+<html>
+<title>meme review</title>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+
+</head>
+<body>
+	<center>
+<div >
+  <a href="/">Home</a>
+  <a href="/add_meme">add a meme</a>
+  <a href="/search">search for a meme</a>
+
+</div>
+
+{%for i in memez%}
+<h4>i.meme_name</h4>
+<img src="i.meme_img">
+<button onclick="myFunction()">Try it</button>
+<div id="myDIV">
+<form action="/the_meme" method="post">
+	<input type="text"name="comment_poster" placeholder="your name" >
+    <input type="range" min="1" max="10" name="comment_rating" >
+	<input type="text"name="comment_content" placeholder="enter your comment" >
+	<input type="submit" value="add a comment" >
+</form>
+</div>
+
+{%endfor%}
+ 
+<script>
+function myFunction() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+
+</center>
+</body>
+</html>
+
+
+
+
 

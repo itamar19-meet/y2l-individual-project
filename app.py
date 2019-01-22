@@ -1,31 +1,38 @@
 from flask import Flask ,  render_template, request
+import database
 app = Flask(__name__)
 
 @app.route('/')
-def search():
-	if(request.method == 'GET'):
-        return render_template("home.html")
-    else:
+def home():
+    return render_template("home.html")
 
-  
-
-@app.route('/add_meme',  methods=['GET', 'POST'])
-def add_event_route():
+@app.route('/add_meme',  methods=['GET','POST'])
+def add_meme_route():
     if(request.method == 'GET'):
         return render_template("add_meme.html")
     else:                                                          
         meme_name = request.form['meme_name']
         meme_img = request.form['meme_img']
-        meme_age = request.form['meme_age'] 
-        
-        add_meme(meme_name , meme_img , meme_age)
-        return 
-@app.route('/search' , methods=['GET', 'POST'])
-def query_memes(key_word):
-	if(request.method == 'GET'):
-        return render_template("search.html")
+        database.add_meme(meme_name , meme_img)
+        return render_template("add_meme.html")
 
- 
+@app.route('/search' , methods=['GET', 'POST'])
+def query_memes():
+    if(request.method == 'GET'):
+        return render_template("search.html")
+    else:
+        return render_template("the_meme.html" , memez = database.query_meme_by_name(request.form['meme_name']))
+     
+@app.route('the_meme' , methods=['GET', 'POST'])
+def add_comment():
+    if(request.method == 'GET'):
+        return render_template("the_meme.html")
+    else:
+    comment_poster = request.form['comment_poster']
+    comment_rating = request.form['comment_rating']
+    comment_content = request.form['comment_content']
+    database.add_comment(comment_poster, comment_rating,comment_content)
+    return render_template("the_meme.html")
 
 if __name__ == '__main__':
     app.run(debug=True)

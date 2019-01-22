@@ -14,9 +14,9 @@ class comment(Base):
 	comment_rating = Column(Integer)
 		
 	
-class meme(Base)
+class meme(Base):
 	__tablename__ = 'memes'
-	meme_id = Column(Integer, primary_key = True)
+	meme_id = Column(Integer, primary_key = True, autoincrement=Truec)
 	meme_name = Column(String)
 	meme_img = Column(String)
-	meme_age = Column(Date)
+	
