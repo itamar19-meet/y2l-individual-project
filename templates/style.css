@@ -1,6 +1,17 @@
-
-
 .home_page{
-  background-image: ("/static/maxresdefault.jpg");
+  background-image: url("maxresdefault.jpg");
 }
+ 
+body{
+	background-color: lightblue;
+}
+
+
+
+
+
+
+
+
+
 

@@ -1,11 +1,26 @@
 <!doctype html>
 <html>
 <title>meme review</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <head>
 	<link rel="stylesheet" type="text/css" href="style.css">
 
 
 </head>
+<script type="text/javascript">
+	function show(){
+	document.getElementById(add_comment).style.visibility= visible;
+}
+</script>
+<style type="text/css">
+	#add_comment{
+		visibility: hidden;
+	}
+</style>
+
+
+
 <body>
 	<center>
 <div >
@@ -16,31 +31,33 @@
 </div>
 
 {%for i in memez%}
-<h4>i.meme_name</h4>
-<img src="i.meme_img">
-<button onclick="myFunction()">Try it</button>
-<div id="myDIV">
+<h4>{{i.meme_name}}</h4>
+<img src="{{i.meme_img}}">
+<!-- comments -->
+<button onclick="show()">add comment</button>
+<div id="add_comment">
 <form action="/the_meme" method="post">
 	<input type="text"name="comment_poster" placeholder="your name" >
+	<br>
     <input type="range" min="1" max="10" name="comment_rating" >
+    <br>
 	<input type="text"name="comment_content" placeholder="enter your comment" >
-	<input type="submit" value="add a comment" >
+	<br>
+	<input type="submit" value="add a comment" id="send_comment">
+	<input type="hidden" name="meme_id" value="{{ i.meme_id }}">
+	<!--  -->
 </form>
 </div>
-
+<button id="show_comments">show comments</button>
+<div id="comments">
+	{%for g in commentz%}
+		<h4>{{g.comment_poster}}</h4>
+		<p>{{g.comment_content}}</p>
+		<p>rate: {{g.rating}}/10</p>
+	{%endfor%}
+</div>
 {%endfor%}
  
-<script>
-function myFunction() {
-  var x = document.getElementById("myDIV");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-}
-</script>
-
 </center>
 </body>
 </html>

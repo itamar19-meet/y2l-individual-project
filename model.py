@@ -7,8 +7,9 @@ Base = declarative_base()
 
 # Write your classes here :
 class comment(Base):
-	__tablename__ = 'reviews'
-	comment_id = Column(Integer ,  primary_key = True)
+	__tablename__ = 'reviews2'
+	comment_id = Column(Integer ,  primary_key = True , autoincrement=True)
+	on_post = Column(Integer)
 	comment_poster = Column(String)
 	comment_content = Column(String)
 	comment_rating = Column(Integer)
@@ -16,7 +17,7 @@ class comment(Base):
 	
 class meme(Base):
 	__tablename__ = 'memes'
-	meme_id = Column(Integer, primary_key = True, autoincrement=Truec)
+	meme_id = Column(Integer, primary_key = True, autoincrement=True)
 	meme_name = Column(String)
 	meme_img = Column(String)
 	
