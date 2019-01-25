@@ -2,22 +2,21 @@
 <html>
 <title>meme review</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+	
 <head>
 	<link rel="stylesheet" type="text/css" href="style.css">
 
 
 </head>
+
+
 <script type="text/javascript">
+	document.getElementById('add_comment').style.visibility= 'hidden';
 	function show(){
-	document.getElementById(add_comment).style.visibility= visible;
+		document.getElementById('add_comment').style.visibility= 'visible';
 }
 </script>
-<style type="text/css">
-	#add_comment{
-		visibility: hidden;
-	}
-</style>
+
 
 
 
@@ -32,8 +31,14 @@
 
 {%for i in memez%}
 <h4>{{i.meme_name}}</h4>
-<img src="{{i.meme_img}}">
-<!-- comments -->
+<form action="/add_like" method="post">
+	<input type="hidden" name="meme_id" value="{{ i.meme_id }}">
+	<input type="submit" value="add like {{i.likes}}">
+</form>
+<br>
+<img src="{{i.meme_img}}"> 
+
+<!-- 
 <button onclick="show()">add comment</button>
 <div id="add_comment">
 <form action="/the_meme" method="post">
@@ -43,10 +48,11 @@
     <br>
 	<input type="text"name="comment_content" placeholder="enter your comment" >
 	<br>
-	<input type="submit" value="add a comment" id="send_comment">
 	<input type="hidden" name="meme_id" value="{{ i.meme_id }}">
-	<!--  -->
-</form>
+	<input type="submit" value="add a comment" id="send_comment">
+	
+	
+</form> 
 </div>
 <button id="show_comments">show comments</button>
 <div id="comments">
@@ -55,7 +61,7 @@
 		<p>{{g.comment_content}}</p>
 		<p>rate: {{g.rating}}/10</p>
 	{%endfor%}
-</div>
+</div> -->
 {%endfor%}
  
 </center>
