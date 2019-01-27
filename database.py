@@ -21,15 +21,16 @@ def add_meme(meme_name, meme_img,likes):
 def add_like(meme_id):
 	to_like = session.query(meme).filter_by(meme_id=meme_id).first()
 	to_like.likes = to_like.likes+1
-# def add_comment(comment_poster, comment_rating , comment_content,on_post):
-# 	comment_object = comment(
-# 		comment_poster = comment_poster,
-# 		comment_rating = comment_rating,
-# 		comment_content = comment_content,
-# 		on_post = on_post)
-# 	session.add(comment_object)
-# 	session.commit()
-# 	return comment_object
+
+def add_comment(comment_poster, comment_rating , comment_content,on_post):
+	comment_object = comment(
+		comment_poster = comment_poster,
+		comment_rating = comment_rating,
+		comment_content = comment_content,
+		on_post = on_post)
+	session.add(comment_object)
+	session.commit()
+	return comment_object
 
 def query_meme_by_name(meme_name):
 	memes = session.query(meme).filter_by(meme_name=meme_name).all()

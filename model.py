@@ -6,17 +6,17 @@ from sqlalchemy import create_engine
 Base = declarative_base()
 
 # Write your classes here :
-# class comment(Base):
-# 	__tablename__ = 'reviews'
-# 	comment_id = Column(Integer ,  primary_key = True , autoincrement=True)
-# 	on_post = Column(Integer)
-# 	comment_poster = Column(String)
-# 	comment_content = Column(String)
-# 	comment_rating = Column(Integer)
+class comment(Base):
+	__tablename__ = 'reviews'
+	comment_id = Column(Integer ,  primary_key = True , autoincrement=True)
+	on_post = Column(Integer)
+	comment_poster = Column(String)
+	comment_content = Column(String)
+	comment_rating = Column(Integer)
 		
 	
 class meme(Base):
-	__tablename__ = 'memes2'
+	__tablename__ = 'memes'
 	meme_id = Column(Integer, primary_key = True, autoincrement=True)
 	meme_name = Column(String)
 	meme_img = Column(String)

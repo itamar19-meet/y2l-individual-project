@@ -22,23 +22,52 @@
 
 <body>
 	<center>
-<div >
-  <a href="/">Home</a>
-  <a href="/add_meme">add a meme</a>
-  <a href="/search">search for a meme</a>
 
-</div>
+<style>
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
+</style>
+
+
+<ul>
+  <li><a class="active" href="/">Home</a></li>
+  <li><a href="/add_meme">Add a meme</a></li>
+  <li><a href="/search">Search for a meme</a></li>
+  
+</ul>
 
 {%for i in memez%}
 <h4>{{i.meme_name}}</h4>
 <form action="/add_like" method="post">
 	<input type="hidden" name="meme_id" value="{{ i.meme_id }}">
+	<input type="hidden" name="meme_name" value="{{ i.meme_name }}">
 	<input type="submit" value="add like {{i.likes}}">
 </form>
 <br>
 <img src="{{i.meme_img}}"> 
 
-<!-- 
+
 <button onclick="show()">add comment</button>
 <div id="add_comment">
 <form action="/the_meme" method="post">
@@ -49,6 +78,7 @@
 	<input type="text"name="comment_content" placeholder="enter your comment" >
 	<br>
 	<input type="hidden" name="meme_id" value="{{ i.meme_id }}">
+	<input type="hidden" name="meme_name" value="{{ i.meme_name }}">
 	<input type="submit" value="add a comment" id="send_comment">
 	
 	
@@ -61,7 +91,7 @@
 		<p>{{g.comment_content}}</p>
 		<p>rate: {{g.rating}}/10</p>
 	{%endfor%}
-</div> -->
+</div>
 {%endfor%}
  
 </center>
