@@ -1,0 +1,203 @@
+<!doctype html>
+<html>
+<title>meme review</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
+	 
+$(document).ready(function() {
+  $('input, select, textarea').on('change', function() {
+    $(this).addClass('changed');
+  });
+  
+  $('form').on('submit', function() {
+    $('input:not(.changed), textarea:not(.changed)').prop('disabled', true);
+    
+    // alert and return just for showing
+    alert($(this).serialize().replace('%5B', '[').replace('%5D', ']'));
+    return false;
+  });
+});
+
+
+</script>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+
+</head>
+
+
+<script type="text/javascript">
+	document.getElementById('add_comment').style.visibility= 'hidden';
+	function show(){
+		document.getElementById('add_comment').style.visibility= 'visible';
+}
+
+
+</script>
+
+
+
+
+	<center>
+
+<style>
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
+ body{
+            font-family: 'Arial';
+
+        }
+.polaroid {
+  width: 50%;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 25px;
+}
+
+.comment_polaroid {
+  width: 50%;
+  background-color: gray;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 25px;
+}
+.container {
+  text-align: center;
+  padding: 10px 20px;
+}
+input[type=text], select, textarea {
+  width: 70%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: center;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.contain{
+  width: 50%
+  border: 2px solid black;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+
+
+
+
+<body>
+  <center>
+
+<ul>
+  <li><a class="active" href="/">Home</a></li>
+  <li><a href="/add_meme">Add a meme</a></li>
+  <li><a href="/search">Search for a meme</a></li>
+   <li><a href="https://imgflip.com/memegenerator" target="_blank">create your own meme</a></li>
+  
+</ul>
+<div class="polaroid">
+<h4>{{i.meme_name}}</h4>
+<div class="container">
+
+<br>
+<img src="{{i.meme_img}}"> 
+
+<div id="add_comment">
+<form action="/meme" method="post">
+  <input type="text"name="comment_poster" placeholder="your name" >
+  <br>
+  how much would you rate it from 1-10<input type="number" name="comment_rating" min="1" max="10">
+  <br>
+  <input type="text"name="comment_content" placeholder="enter your comment" >
+  <br>
+  <input type="hidden" name="meme_id" value="{{i.meme_id}}">
+  <input type="hidden" name="meme_name" value="{{i.meme_name}}">
+  <input type="submit" value="add a comment" id="send_comment">
+</form> 
+</div>
+</div>
+</div>
+
+
+  {%for g in commentz%}
+  <div class="contain">
+    <h4> author: {{g.comment_poster}}</h4> <p>rate: {{g.comment_rating}}/10</p>
+    
+<div class="comment_polaroid">
+  <div class="container">
+    <p>{{g.comment_content}}</p>
+      <br>
+    </div>
+    </div>
+    </div>
+  {%endfor%}
+
+
+</center>
+</body>
+</html>
+
+
+
+
+
+
+
+

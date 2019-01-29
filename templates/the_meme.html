@@ -2,7 +2,24 @@
 <html>
 <title>meme review</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
+	 
+$(document).ready(function() {
+  $('input, select, textarea').on('change', function() {
+    $(this).addClass('changed');
+  });
+  
+  $('form').on('submit', function() {
+    $('input:not(.changed), textarea:not(.changed)').prop('disabled', true);
+    
+    // alert and return just for showing
+    alert($(this).serialize().replace('%5B', '[').replace('%5D', ']'));
+    return false;
+  });
+});
+
+
+</script>
 <head>
 	<link rel="stylesheet" type="text/css" href="style.css">
 
@@ -15,6 +32,8 @@
 	function show(){
 		document.getElementById('add_comment').style.visibility= 'visible';
 }
+
+
 </script>
 
 
@@ -47,6 +66,21 @@ li a {
 li a:hover {
   background-color: #111;
 }
+ body{
+            font-family: 'Arial';
+
+        }
+div.polaroid {
+  width: 50%;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 25px;
+}
+
+div.container {
+  text-align: center;
+  padding: 10px 20px;
+}
 </style>
 
 
@@ -54,48 +88,46 @@ li a:hover {
   <li><a class="active" href="/">Home</a></li>
   <li><a href="/add_meme">Add a meme</a></li>
   <li><a href="/search">Search for a meme</a></li>
+   <li><a href="https://imgflip.com/memegenerator" target="_blank">create your own meme</a></li>
   
 </ul>
 
 {%for i in memez%}
-<h4>{{i.meme_name}}</h4>
-<form action="/add_like" method="post">
-	<input type="hidden" name="meme_id" value="{{ i.meme_id }}">
-	<input type="hidden" name="meme_name" value="{{ i.meme_name }}">
-	<input type="submit" value="add like {{i.likes}}">
+<div class="polaroid">
+	<br>
+<h3>{{i.meme_name}}</h3>
+<img src="{{i.meme_img}}" alt="{{i.meme_name}}" style="width:50%">
+<div class="container">
+
+<form action="/add_like" method="post" class="myForm">
+  <input type="hidden" name="meme_id" value="{{ i.meme_id }}">
+  <input type="hidden" name="meme_name" value="{{ i.meme_name }}">
+  <input type="submit" value="add like {{i.likes}}" class="like" onclick="disapear()">
+  <script type="text/javascript">
+  	function disapear() {
+  	document.getElementByClass("like").disabled = true;
+  	document.getElementByClass("myForm").submit();
+  }
+  </script>
 </form>
-<br>
-<img src="{{i.meme_img}}"> 
-
-
-<button onclick="show()">add comment</button>
-<div id="add_comment">
 <form action="/the_meme" method="post">
-	<input type="text"name="comment_poster" placeholder="your name" >
-	<br>
-    <input type="range" min="1" max="10" name="comment_rating" >
-    <br>
-	<input type="text"name="comment_content" placeholder="enter your comment" >
-	<br>
-	<input type="hidden" name="meme_id" value="{{ i.meme_id }}">
-	<input type="hidden" name="meme_name" value="{{ i.meme_name }}">
-	<input type="submit" value="add a comment" id="send_comment">
+<input type="hidden" name="meme_id" value="{{ i.meme_id }}">
+<input type="submit" value="show comments" >	
 	
-	
+	<br>
 </form> 
 </div>
-<button id="show_comments">show comments</button>
-<div id="comments">
-	{%for g in commentz%}
-		<h4>{{g.comment_poster}}</h4>
-		<p>{{g.comment_content}}</p>
-		<p>rate: {{g.rating}}/10</p>
-	{%endfor%}
 </div>
+<br>
 {%endfor%}
- 
-</center>
-</body>
+
+
+
+
+
+
+
+
 </html>
 
 

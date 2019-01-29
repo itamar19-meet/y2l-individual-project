@@ -11,7 +11,8 @@
             background-color: 'white';
         }
         body{
-            background-image: url("maxresdefault.jpg");
+            font-family: 'Arial';
+
         }
 
 
@@ -20,6 +21,9 @@
     </style>
 <style>
 ul {
+  top: 0%;
+  left: 0%;
+  right: 0%;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -42,41 +46,117 @@ li a {
 li a:hover {
   background-color: #111;
 }
+* {
+  box-sizing: border-box;
+}
+
+input[type=text], select, textarea {
+  width: 70%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: center;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
 </style>
+
 
 
 <ul>
   <li><a class="active" href="/">Home</a></li>
   <li><a href="/add_meme">Add a meme</a></li>
   <li><a href="/search">Search for a meme</a></li>
+   <li><a href="https://imgflip.com/memegenerator" target="_blank">create your own meme</a></li>
   
 </ul>
 
 
     <br>
+
+        
+    <div class="container">
+         <h1>Add your meme:</h1>
+  <form action="/add_meme" method="post">
+    <div class="row">
+      <div class="col-25">
+        <label for="name">give it an interesting title</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="name" name="meme_name" placeholder="meme title">
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-25">
+        <label for="link">insert a link to your meme's image</label>
+    </div>
+    <div class="col-75">
+        <input type="text"name="meme_img" placeholder="insert link with '.jpg' at the end"id="link" placeholder="insert link" >
+       </div>
+    </div>
     <center>
-    <div >
-        
-        <h1>Add your meme:</h1>
-        <br>
-
-        <form action="/add_meme" method="post">
-
-        <!--  -->
-        <h3>meme's name</h3>
-        <input type="text"name="meme_name" placeholder="meme name" >
-        <br>
-        
-        <h3>insert img link</h3>
-        <input type="text"name="meme_img" placeholder="insert link" >
-        <br>
-        <input type="submit" value="Submit" >
-        <br>
-        
-
-        </form>
-        
+    <div class="row">
+</div>
+      <input type="submit" value="Submit">
     </div>
     </center>
+  </form>
+<h3>an example:</h3>
+<p>turn </p> <p font color="red"> https://imgflip.com/i/2sbr4k</p> 
+<p>to</p>
+<p font color="red">https://i.imgflip.com/2sbr4k.jpg</p>
+<p>remember to put 'i.' before 'imgflip' and delete the 'i/' </p>
+
+
     </body>
 </html>

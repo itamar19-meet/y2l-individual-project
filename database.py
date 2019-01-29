@@ -35,10 +35,13 @@ def add_comment(comment_poster, comment_rating , comment_content,on_post):
 def query_meme_by_name(meme_name):
 	memes = session.query(meme).filter_by(meme_name=meme_name).all()
 	return memes
+def query_meme_by_id(meme_id):
+	memes = session.query(meme).filter_by(meme_id=meme_id).first()
+	return memes
 def query_comments_by_post(on_post):
 	comments = session.query(comment).filter_by(on_post = on_post).all()
 	return comments
-	
+
 
 
 

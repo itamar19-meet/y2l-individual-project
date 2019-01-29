@@ -24,16 +24,13 @@ def query_memes():
         return render_template("the_meme.html" , memez = database.query_meme_by_name(request.form['meme_name']))
      
 @app.route('/the_meme' , methods=['GET', 'POST'])
-def add_comment():
+def go_to_the_meme():
     if(request.method == 'GET'):
         return render_template("the_meme.html")
     else:
-        comment_poster = request.form['comment_poster']
-        comment_rating = request.form['comment_rating']
-        comment_content = request.form['comment_content']
         on_post = int(request.form["meme_id"])
-        database.add_comment(comment_poster, comment_rating , comment_content,on_post)
-        return render_template("the_meme.html" , commentz = database.query_comments_by_post(on_post) , memez = database.query_meme_by_name(request.form['meme_name']))
+        return render_template("meme.html" , commentz = database.query_comments_by_post(on_post) , i = database.query_meme_by_id(request.form['meme_id']))
+
 
 @app.route('/add_like' , methods=['GET', 'POST'])
 def add_like_route():
@@ -43,6 +40,20 @@ def add_like_route():
         meme_id= int(request.form["meme_id"])
         database.add_like(meme_id)
         return render_template("the_meme.html" , memez = database.query_meme_by_name(request.form['meme_name']))
+
+@app.route('/meme',methods=['GET', 'POST'])
+def add_comment():
+    if(request.method == 'GET'):
+        return render_template("meme.html")
+    else:
+        comment_poster = request.form['comment_poster']
+        comment_rating = int(request.form['comment_rating'])
+        comment_content = request.form['comment_content']
+        on_post = int(request.form["meme_id"])
+        database.add_comment(comment_poster, comment_rating , comment_content,on_post)
+        return render_template("meme.html" , commentz = database.query_comments_by_post(on_post) , i = database.query_meme_by_id(request.form['meme_id']))
+
+
 
 
 
